@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { fetchUsers, User } from '../services/ApiService';
+import { fetchUsers, fetchPositions, User, Position } from '../services/ApiService';
 
 export default defineComponent({
     data() {
@@ -8,14 +8,24 @@ export default defineComponent({
             users: [] as User[],
             currentPage: 0,
             totalPages: 0,
+            positions: [] as Position[],
+            name: '',
+            email: '',
+            phone: '',
+            position: '',
+            nameTouched: false,
+            emailTouched: false,
+            phoneTouched: false
         };
     },
     async mounted() {
         try {
-            let data = await fetchUsers();
-            this.users = data.users;
-            this.currentPage = data.page;
-            this.totalPages = data.total_pages;
+            let userData = await fetchUsers();
+            let positionData = await fetchPositions();
+            this.users = userData.users;
+            this.currentPage = userData.page;
+            this.totalPages = userData.total_pages;
+            this.positions = positionData;
         } catch (error) {
             console.error(error);
         }
@@ -23,12 +33,22 @@ export default defineComponent({
     methods: {
         async loadMore() {
             try {
-                const data = await fetchUsers(this.currentPage + 1);
-                this.users = data.users;
-                this.currentPage = data.page;
+                const userData = await fetchUsers(this.currentPage + 1);
+                this.users = userData.users;
+                this.currentPage = userData.page;
             } catch (error) {
                 console.error(error);
             }
+        },
+        isNameValid() {
+            return this.name.length >= 2 && this.name.length <= 60;
+        },
+        isEmailValid() {
+            const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+            return emailRegex.test(this.email);
+        },
+        isPhoneValid() {
+            return this.phone.startsWith('+380');
         }
     }
 });
@@ -59,7 +79,7 @@ export default defineComponent({
             </div>
         </div>
         <div class="GET-container">
-            <h1 class="GET-title">Working with GET request</h1>
+            <h1 class="title">Working with GET request</h1>
             <div class="card-container">
                 <div class="card" v-for="user in users" :key="user.id">
                     <div class="user-img">
@@ -80,136 +100,51 @@ export default defineComponent({
             Show more
             </button>
         </div>
+        <div class="POST-container">
+            <h1 class="title">Working with POST request</h1>
+            <form class="post-form">
+                <input class="form-input"
+                    type="text"
+                    v-model="name" 
+                    :class="{ 'input-error': !isNameValid() && nameTouched }"
+                    placeholder="Your name" 
+                    @blur="this.nameTouched = true;"
+                    required />
+                <input class="form-input" 
+                    type="email" 
+                    v-model="email"
+                    :class="{ 'input-error': !isEmailValid() && emailTouched }"
+                    placeholder="Email" 
+                    @blur="this.emailTouched = true;"
+                    required />
+                <div class="tel-container">
+                    <input class="form-input" 
+                        type="tel" 
+                        v-model="phone"
+                        :class="{ 'input-error': !isPhoneValid() && phoneTouched }"
+                        placeholder="Phone"
+                        @blur="this.phoneTouched = true;" 
+                        required />
+                    <span class="tel-format">+38 (XXX) XXX - XX - XX</span>
+                </div>
+
+                <div class="radio-container">
+                    <div v-for="selectPosition in positions" :key="selectPosition.id">
+                        <input
+                            type="radio"
+                            :value="selectPosition.name"
+                            v-model="position"
+                        />
+                        <label :for="selectPosition.id">{{ selectPosition.name }}</label>
+                    </div>
+                </div>
+
+                <input class="form-input" type="file" accept="image/*" />
+
+                <button type="submit">Sign up</button>
+            </form>
+        </div>
     </div>
 </template>
 
-<style scoped lang="scss">
-.main-container {
-    background-color: #f8f8f8;
-}
-
-.navbar {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-}
-
-.navbar-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 60px;
-    width: 100%;
-    max-width: 1286px;
-}
-
-.logo-img {
-    width: 104px;
-    padding-left: 60px;
-}
-
-.button-container {
-    display: flex;
-    gap: 10px;
-    padding-right: 60px;
-}
-
-button {
-    background-color: #F4E041;
-    width: 100px;
-    height: 34px;
-    border-radius: 80px;
-    border: 0;
-}
-
-.backgroundimage-container {
-    width: 100%;
-    height: calc(100vh - 60px);
-    max-height: 650px;
-    max-width: 1170px;
-    background-image: url('../assets/pexels-alexandr-podvalny-1227513.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.backgroundimage-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #00000080;
-    z-index: 1;
-}
-
-.backgroundimage-content {
-    position: relative;
-    z-index: 2;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    max-width: 380px;
-    top: 50%;
-    transform: translateY(-50%);
-    align-items: center;
-}
-
-.GET-container {
-    margin: 140px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 50px;
-}
-
-.GET-title {
-    color: #000000DE;
-}
-
-.card-container {
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 29px;
-    max-width: 1168px;
-    padding: 0px 60px;
-}
-
-.card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    background-color: #fff;
-    border-radius: 16px;
-    height: 254px;
-    max-width: 370px;
-    padding: 20px;
-}
-
-.card div{
-    width: 100%;
-}
-
-.card p{
-    width: 100%;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.user-img img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-</style>
+<style lang="scss" scoped src="./MainComponent.scss"></style>
