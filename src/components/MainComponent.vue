@@ -152,7 +152,7 @@
             >
                 <div class="card" v-for="user in users" :key="user.id">
                     <div class="user-img">
-                        <img :src="user.photo" alt="User Image" />
+                        <img loading="lazy" :src="user.photo" alt="User Image" />
                     </div>
                     <div><p v-overflow-tooltip>{{ user.name }}</p></div>
                     <div>
