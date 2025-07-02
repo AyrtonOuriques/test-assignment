@@ -18,6 +18,11 @@
         height: 26px;
         padding-left: 60px;
 
+        img {
+            width: 104px;
+            height: 26px;
+        }
+
         @media (max-width: 768px) {
             padding-left: 32px;
         }
