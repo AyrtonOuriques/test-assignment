@@ -16,6 +16,9 @@ export default class App extends Vue {}
 </script>
 
 <style lang="scss">
+  html {
+    scroll-behavior: smooth;
+  }
   * {
     font-family: "Nunito", sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -26,10 +29,10 @@ export default class App extends Vue {}
     box-sizing: border-box;
     font-size: 16px;
     line-height: 26px;
-    text-align: center;
   }
   h1 {
     font-size: 40px;
     line-height: 40px;
+    text-align: center;
   }
 </style>

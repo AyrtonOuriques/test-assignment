@@ -1,4 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import { overflowTooltip } from './utils/overflowDirective';
 
-createApp(App).mount('#app')
+
+const app = createApp(App);
+app.directive('overflow-tooltip', overflowTooltip);
+app.mount('#app');
