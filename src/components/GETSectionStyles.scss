@@ -1,0 +1,71 @@
+//STYLES TO THE GET SECTION
+.GET-container {
+    margin: 140px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+
+    @media (max-width: 360px) {
+        padding: 0px 16px;
+    }
+}
+
+// CARDS GRID BLOCK, TRANSITION TO SMOOTH WHEN SWITCHING TO OTHER CARDS
+.card-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 29px;
+    max-width: 1168px;
+    padding: 0px 60px;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+   
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 0px 32px;
+    }
+
+    @media (max-width: 360px) {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        padding: 0px 16px;
+    }
+
+    &.fade-hidden {
+        opacity: 0;
+    }
+}
+
+//INDIVIDUAL CARD STYLING
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: #fff;
+    border-radius: 16px;
+    height: 254px;
+    max-width: 370px;
+    padding: 20px;
+    text-align: center;
+
+    //NECESSARY FOR TEXT OVERFLOW TO WORK
+    div, p {
+        width: 100%;
+    }
+
+    p {
+        color: #000000DE;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+        
+    .user-img img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+}

@@ -1,0 +1,181 @@
+//STYLES TO THE POST SECTION AND THE SUCCESS IMAGE
+.POST-container, .POST-success {
+    min-height: 380px;
+    padding-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+
+    @media (max-width: 360px) {
+        padding: 0px 16px 100px;
+    }
+
+    //STYLES TO THE SUBMISSION POST FORM
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+        width: 100%;
+        color: rgba(0, 0, 0, 0.87);
+        //STYLES TO THE FORM INPUTS
+        .form-input {
+            max-width: 380px;
+            width: 100%;
+            height: 54px;
+            border: 1px solid #D0CFCF;
+            border-radius: 4px;
+            padding-left: 16px;
+            background-color: transparent;
+            text-align: left;
+            outline: none;
+            box-shadow: none;
+        }
+    }
+}
+
+//BORDER STYLE WHEN USER MISTYPES IN AN INPUT
+.input-error {
+    border: 2px solid rgb(207, 10, 10) !important;
+}
+
+//ESPECIAL BORDER STYLE FOR FILE INPUT
+.input-error-filename {
+    border: 2px solid rgb(207, 10, 10) !important;
+    border-left: 0px !important;
+}
+
+//STYLE FOR THE ERROR TEXT
+.error-explain {
+    color: #CB3D40;
+    font-size: 12px;
+    padding-left: 16px;
+    line-height: 14px;
+}
+
+//WRAPPER STYLES FOR THE NORMAL INPUTS, THE RADIO INPUT AND THE FILE INPUT
+.radio-container, 
+.file-upload,
+.input-container {
+    max-width: 380px; 
+    width: 100%;
+}
+
+.radio-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: #000000DE;
+}
+
+.input-container{
+    height: 54px; 
+}
+
+//PHONE ESPECIFICATION STYLING
+.tel-format {
+    font-size: 12px;
+    line-height: 14px;
+    color: #7E7E7E;
+    padding-left: 16px;
+}
+
+
+//STYLES TO THE RADIO INPUT
+.radio-label {
+    align-items: center;
+    position: relative;
+    padding-left: 32px;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover .custom-radio {
+        border-color: #666;
+    }
+
+    //STYLES TO THE RADIO INPUT WHEN SELECTED
+    .radio-input {
+        position: absolute;
+        opacity: 0;
+
+        &:checked + .custom-radio {
+        border-color: #00bdd3;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 10px;
+                height: 10px;
+                background: #00bdd3;
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+
+    //STYLES TO THE RADIO INPUT WHEN UNSELECTED
+    .custom-radio {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 20px;
+        width: 20px;
+        border: 1px solid #D0CFCF;
+        border-radius: 50%;
+        transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+}
+
+//HIDING ORIGINAL FILE INPUT
+input[type="file"] {
+    display: none;
+}
+
+//STYLES TO THE NEW FILE INPUT
+.file-upload{
+    display: flex;
+    flex-direction: column;
+    height: 54px;
+}
+
+.upload-label {
+    display: flex;
+    width: 100%;
+    cursor: pointer;
+    padding-bottom: 4px;
+}
+
+//STYLES TO THE NAME OF THE FILE
+.file-name{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 54px;
+    border: 1px solid #D0CFCF;
+    border-radius: 0px 4px 4px 0px;
+    padding-left: 16px;
+    color: #7E7E7E;
+}
+
+//STYLES TO THE BUTTON OF THE INPUT
+.custom-file-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 54px;
+    max-width: 83px;
+    width: 100%;
+    background-color: #f8f8f8;
+    border: 1px solid rgba(0, 0, 0, 0.87);
+    border-radius: 4px 0px 0px 4px;
+    transition: background-color 200ms;
+
+    &:hover {
+        background-color: #e4e5e7;
+    }
+}

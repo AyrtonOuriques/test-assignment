@@ -1,18 +1,28 @@
 <template>
+  <SpinnerComponent v-if="loading" />
   <MainComponent/>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import SpinnerComponent from './components/SpinnerComponent.vue';
 import MainComponent from './components/MainComponent.vue';
-
 
 @Options({
   components: {
+    SpinnerComponent,
     MainComponent,
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  loading = true;
+
+  mounted() {
+    window.addEventListener('load', () => {
+      this.loading = false;
+    });
+  }
+}
 </script>
 
 <style lang="scss">

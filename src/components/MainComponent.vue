@@ -61,6 +61,7 @@
         formData.append('email', email.value);
         formData.append('phone', phone.value);
         formData.append('position_id', position.value);
+
         if (file.value) formData.append('photo', file.value);
 
         try {
@@ -73,7 +74,7 @@
         catch (error) {
             console.error('Error creating user:', error);
         }
-        }
+    }
 
     async function loadMore() {
         try {
@@ -212,7 +213,7 @@
     
                     <div class="radio-container">
                         <p>Select your position</p>
-                       <div v-for="selectPosition in positions" :key="selectPosition.id" class="radio-wrapper">
+                        <div v-for="selectPosition in positions" :key="selectPosition.id">
                             <label class="radio-label">
                                 <input
                                 class="radio-input"
@@ -225,7 +226,6 @@
                             </label>
                         </div>
                     </div>
-    
                     <div class="file-upload">
                         <label for="imageUpload" class="upload-label">
                             <div class="custom-file-button" :class="{ 'input-error': !validImage }">Upload</div>
@@ -246,9 +246,8 @@
                             User photo should be jpg/jpeg image, with resolution at least 70x70px and size must not exceed 5MB.
                         </span>
                     </div>
-    
+                    <button type="submit" :disabled="!isFormValid">Sign up</button>
                 </form>
-                <button @click="successPost=true">Sign up</button>
             </div>
             <div class="POST-success" v-else>
                 <h1 class="title">User successfully registered</h1>
