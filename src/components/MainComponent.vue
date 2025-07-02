@@ -11,9 +11,6 @@
     const phone       = ref('');
     const position    = ref('');
     const file = ref<File | null>(null);
-    const nameTouched = ref(false);
-    const emailTouched= ref(false);
-    const phoneTouched= ref(false);
     const validImage  = ref(true);
     const successPost = ref(false);
     const selectedFileName = ref('');
@@ -179,12 +176,11 @@
                         <input class="form-input"
                             type="text"
                             v-model="name" 
-                            :class="{ 'input-error': !isNameValid && nameTouched }"
+                            :class="{ 'input-error': !isNameValid}"
                             placeholder="Your name" 
-                            @blur="nameTouched = true;"
                             required />
                         <span 
-                            v-if="!isNameValid && nameTouched"
+                            v-if="!isNameValid"
                             class="error-explain"
                         >
                             User name, should be 2-60 characters
@@ -194,12 +190,11 @@
                         <input class="form-input" 
                             type="email" 
                             v-model="email"
-                            :class="{ 'input-error': !isEmailValid && emailTouched }"
+                            :class="{ 'input-error': !isEmailValid }"
                             placeholder="Email" 
-                            @blur="emailTouched = true;"
                             required />
                         <span 
-                            v-if="!isEmailValid && emailTouched" 
+                            v-if="!isEmailValid" 
                             class="error-explain"
                         >
                             User email, must be a valid email according to RFC2822
@@ -209,9 +204,8 @@
                         <input class="form-input" 
                             type="tel" 
                             v-model="phone"
-                            :class="{ 'input-error': !isPhoneValid && phoneTouched }"
+                            :class="{ 'input-error': !isPhoneValid }"
                             placeholder="Phone"
-                            @blur="phoneTouched = true;" 
                             required />
                         <span class="tel-format">+38 (XXX) XXX - XX - XX</span>
                     </div>
