@@ -134,12 +134,19 @@
             </div>
         </nav>
         <div class="backgroundimage-container">
-            <img
-                src="../../assets/pexels-alexandr-podvalny-1227513.webp"
-                alt="Background"
-                class="backgroundimage-img"
-                fetchpriority="high"
-            />
+            <picture>
+                <source
+                    src="../../assets/pexels-alexandr-podvalny-1227513-smaller.webp"
+                    media="(max-width: 768px)"
+                    type="image/webp"
+                />
+                <img
+                    src="../../assets/pexels-alexandr-podvalny-1227513.webp"
+                    alt="Background"
+                    fetchpriority="high"
+                    class="backgroundimage-img"
+                />
+            </picture>
             <div class="backgroundimage-content">
                 <h1>Test assignment for front-end developer</h1>
                 <p>What defines a good front-end developer is one that has skilled knowledge of HTML, CSS, JS with a
