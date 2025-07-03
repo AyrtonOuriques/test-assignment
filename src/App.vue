@@ -5,8 +5,8 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import SpinnerComponent from './components/SpinnerComponent.vue';
-import MainComponent from './components/MainComponent.vue';
+import SpinnerComponent from './components/SpinnerComponent/SpinnerComponent.vue';
+import MainComponent from './components/MainComponent/MainComponent.vue';
 
 @Options({
   components: {

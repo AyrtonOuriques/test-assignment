@@ -8,6 +8,10 @@
     gap: 50px;
     width: 100%;
 
+    @media (max-width: 768px) {
+        padding: 0px 32px 100px;
+    }
+
     @media (max-width: 360px) {
         padding: 0px 16px 100px;
     }

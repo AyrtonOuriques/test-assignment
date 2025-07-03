@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { ref, computed, onMounted } from 'vue';
-    import { getUsers, getPositions, postUser, User, Position } from '../services/ApiService';
+    import { getUsers, getPositions, postUser, User, Position } from '../../services/ApiService';
 
     const users       = ref<User[]>([]);
     const currentPage = ref(0);
@@ -124,7 +124,7 @@
         <nav class="navbar">
             <div class="navbar-inner">
                 <div class="logo-img">
-                    <img src="../assets/Logo.svg" alt="Logo" />
+                    <img src="../../assets/Logo.svg" alt="Logo" />
                 </div>
 
                 <div class="button-container">
@@ -252,7 +252,7 @@
             <div class="POST-success" v-else>
                 <h1 class="title">User successfully registered</h1>
                 <div class="success-img">
-                        <img src="../assets/success-image.svg" alt="Success POST" />
+                        <img src="../../assets/success-image.svg" alt="Success POST" />
                 </div>
             </div>
         </transition>
