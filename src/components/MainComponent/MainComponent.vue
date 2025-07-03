@@ -136,7 +136,7 @@
         <div class="backgroundimage-container">
             <picture>
                 <source
-                    src="../../assets/pexels-alexandr-podvalny-1227513-smaller.webp"
+                    srcset="../../assets/pexels-alexandr-podvalny-1227513-smaller.webp"
                     media="(max-width: 768px)"
                     type="image/webp"
                 />
